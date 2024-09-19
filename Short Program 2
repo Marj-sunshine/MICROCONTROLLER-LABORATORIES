@@ -1,0 +1,22 @@
+#include<REG52.h>
+	sbit PMP=P1^6;
+	sbit ALRM=P1^7;
+	
+	void main(){
+	unsigned char x;
+		P1 = 0X03;//initialize
+		while(1)
+		{
+			x=P1 & 0x003;
+			switch(x){
+				case 0: PMP =1;
+								ALRM=0;
+								break;
+				case 3: PMP=0;
+								ALRM=0;
+								break;
+				case 2: PMP=0;
+								ALRM=1;
+			}
+		}
+	}
