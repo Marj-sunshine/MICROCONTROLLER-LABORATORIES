@@ -1,0 +1,50 @@
+/* Write an 8051 program that will implement the I/O relationship given below:
+
+INPUT OUTPUT
+S1 S0 OUT3 OUT2 OUT1 OUT0
+0  0    1   1     1   1
+0  1    1   1     0   0
+        0   1     1   0
+        0   0     1   1
+1  0    1   0     1   0
+1  1    0   0     0   0
+
+*/
+
+
+#include <REG52.h>
+
+sbit OUT0=P1^0;
+sbit OUT0=P1^1;
+sbit OUT0=P1^2;
+sbit OUT0=P1^3;
+
+void delay1(){
+  int i,j; //200 x 200
+      for (i=0; i<200; i++)
+        for (j=0; j<2000; i++);
+}
+void main(){
+  unsigned char x;
+  P1 = 0xCO;
+  while(1){
+  x=P1 & 0xCO;
+  switch(x)
+  {
+    case 0x00: OUT3=OUT2=OUT2=OUT1=OUT0=1;
+               break;
+    case 0x40: OUT3=OUT2=1;
+               OUT1=OUT0=0;
+               delay1()
+              OUT2=OUT1=1;
+              OUT3=OUT0=0;
+              delay1();
+    case 0x80:
+              OUT3=OUT1=1;
+              OUT2=OUT0=0;
+              break;
+    case 0xCO:
+              OUT3=OUT2=OUT1=OUT0=0;
+  }
+ }
+}
